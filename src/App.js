@@ -11,11 +11,11 @@ function App() {
       <Canvas style={{ height: 1000, width: 1000, background: '#272730' }}>
         <ambientLight intensity={0.5} />
         <pointLight intensity={0.1} position={[500, 500, 1000]} />
-        <Box position={[70, 70, 0]} />
+        {/* <Box position={[70, 70, 0]} />
         <Box position={[-70, 70, 0]} />
         <Box position={[70, -70, 0]} />
-        <Box position={[-70, -70, 0]} />
-        {/* <Pcdloader /> */}
+        <Box position={[-70, -70, 0]} /> */}
+        <Pcdloader />
         <OrbitControls />
       </Canvas>
     </div>

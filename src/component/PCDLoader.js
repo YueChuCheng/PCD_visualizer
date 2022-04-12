@@ -1,5 +1,5 @@
 import { PCDLoader } from 'three/examples/jsm/loaders/PCDLoader';
-
+import * as THREE from 'three';
 
 const loader = new PCDLoader();
 
@@ -8,7 +8,7 @@ const loader = new PCDLoader();
 
 // load a resource
 const Pcdloader = () => loader.load('./pcd_data/Zaghetto.pcd', function (points) {
-    console.log(points)
+
     points.geometry.center();
     points.geometry.rotateX(Math.PI);
     return <mesh material={points}><meshBasicMaterial color={0x00ff00} /></mesh>
