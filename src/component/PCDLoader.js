@@ -1,43 +1,39 @@
-import { PCDLoader } from '../jsm/PCDLoader.js';
-
-const loader = new PCDLoader();
+import { PCDLoader } from 'three/examples/jsm/loaders/PCDLoader.js';
+import React, { useState } from 'react'
+import { Scene, PerspectiveCamera } from 'three'
 
 
 console.log(require('../Zaghetto.pcd'))
 
-// // load a resource
-// const Pcdloader = () => loader.load('./static/media/Zaghetto.a0f615df8ef7e5415870.pcd', function (points) {
+const PCDScene = () => {
+    const [sceneState] = useState(() => {
+        const scene = new Scene();
+        const loader = new PCDLoader();
+        loader.load(
+            // resource URL
+            './static/media/Zaghetto.a0f615df8ef7e5415870.pcd',
 
-//     // points.geometry.center();
-//     // points.geometry.rotateX(Math.PI);
-//     return <mesh material={points}><meshBasicMaterial color={0x00ff00} /></mesh>
-//     // scene.add(points);
+            // called when the resource is loaded
+            function (points) {
+                points.geometry.center();
+                points.geometry.rotateX(Math.PI);
+                points.material.size = 0.001;
+                points.material.color.setHex(0xffffff);
+                scene.add(points)
+            },
+        );
 
-//     // render();
+        const camera = new PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.01, 40);
+        camera.position.set(0, 0, 1);
+        scene.add(camera);
 
-// });
-const Pcdloader = () => loader.load(
-    // resource URL
-    './static/media/Zaghetto.a0f615df8ef7e5415870.pcd',
-    // called when the resource is loaded
-    function (mesh) {
+        return scene
+    })
 
-        // scene.add(mesh);
-        return <mesh material={mesh}><meshBasicMaterial color={0x00ff00} /></mesh>
+    return (<scene>
+        <primitive object={sceneState} />
+    </scene>)
 
-    },
-    // called when loading is in progresses
-    function (xhr) {
+}
 
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-
-    },
-    // called when loading has errors
-    function (error) {
-
-        console.log('An error happened');
-
-    }
-);
-
-export default Pcdloader
+export default PCDScene
